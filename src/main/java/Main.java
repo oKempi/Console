@@ -42,6 +42,7 @@ public class Main {
                     listDirectories(pwd);
                     break;
                 case "cat":
+                    cat(input[1]);
                     break;
                 case "pwd":
                     System.out.println(pwd.getAbsolutePath());

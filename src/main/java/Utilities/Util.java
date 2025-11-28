@@ -1,6 +1,9 @@
 package Utilities;
 import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class Util {
     public static String userDir = System.getProperty("user.home").toString();
@@ -39,7 +42,7 @@ public class Util {
     }
     public static void cd(Boolean yes, String flag) {
         if(Objects.equals(flag, "-r")){
-            pwd = new File("C:\\Users\\Jakub");
+            pwd = new File(System.getProperty("user.home").toString());
             return;
         }
     }
@@ -70,16 +73,21 @@ public class Util {
         //TODO implement cat
         File[] files = pwd.listFiles();
         assert files != null;
-        for (File file : files) {
-            if (file.getName().equals(filename)) {
-                System.out.println("File found");
+        for (File dirs : files) {
+            if (dirs.getName().equals(filename)) {
+                File file = new File(filename);
+                try (Scanner sc = new Scanner(file)){
+                    while(sc.hasNextLine()){
+                        System.out.println(sc.nextLine());
+                    }
+                }catch(IOException e){return;}
             }
+            else {System.out.println("No such file was found!");}
         }
     }
 
     public static void newLine(){
         String name = System.getProperty("user.name") + "@" + System.getenv("COMPUTERNAME");
-        //TODO write something like user@pc:~/current/directory$
         if(pwd.toString().equals(System.getProperty("user.home").toString())){
             System.out.print(name + " ~" + "\n" + "> ");
         }
