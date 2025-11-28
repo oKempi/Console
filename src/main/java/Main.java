@@ -40,7 +40,6 @@ public class Main {
                     break;
                 case "ls":
                     listDirectories(pwd);
-                    //lists files in current directory
                     break;
                 case "cat":
                     break;

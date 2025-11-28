@@ -83,6 +83,6 @@ public class Util {
         if(pwd.toString().equals(System.getProperty("user.home").toString())){
             System.out.print(name + " ~" + "\n" + "> ");
         }
-        else{System.out.print(name + " " + pwd.getAbsolutePath() + "\n" + "> ");}
+        else{System.out.print(name + " ~\\" + pwd.getAbsolutePath() + "\n" + "> ");}
     }
 }
