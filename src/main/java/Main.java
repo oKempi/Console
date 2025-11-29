@@ -39,7 +39,7 @@ public class Main {
                     else {System.out.println("Too many arguments!");}
                     break;
                 case "ls":
-                    listDirectories(pwd);
+                    listDirectories(pwd, reader);
                     break;
                 case "cat":
                     cat(input[1]);

@@ -46,22 +46,20 @@ public class Util {
     }
 
     //ls
-    public static void listDirectories(File directory) { //TODO make directories be \name and files +name (list both)
+    public static void listDirectories(File directory, BufferedReader reader) throws IOException{ //TODO make directories be \name and files +name (list both)
         File[] files = directory.listFiles();
         int count = 0;
 
         if(files !=null && files.length > 25){
             System.out.println("Do you want to list all files? (y/n)");
-            try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))){
-                if(br.readLine().equals("y")){
-                    for (File file : files) {
-                        if (file.isDirectory()) {
-                            System.out.println(file.getName());
-                        }
+            if(reader.readLine().equals("y")){
+                for (File file : files) {
+                    if (file.isDirectory()) {
+                        System.out.println(file.getName());
                     }
                 }
-                else {return;}
-            }catch(IOException e){return;}
+            }
+            else {return;}
         }
         else if(files != null && files.length > 0){
             for (File file : files) {
@@ -69,6 +67,7 @@ public class Util {
                     System.out.println(file.getName());
                 }
             }
+            return;
         }
         else{
             System.out.println("No files found!");
