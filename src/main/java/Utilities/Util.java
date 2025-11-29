@@ -16,6 +16,8 @@ public class Util {
         System.out.println("ls - list directories in current directory");
         System.out.println("pwd - print working directory");
         System.out.println("exit - exit the program");
+        System.out.println("cat - show contents of a file");
+        System.out.println("clear/cls - clear the whole console");
     }
 
     //CD
@@ -46,8 +48,8 @@ public class Util {
     }
 
     //ls
-    public static void listDirectories(File directory, BufferedReader reader) throws IOException{ //TODO make directories be \name and files +name (list both)
-        File[] files = directory.listFiles();
+    public static void listDirectories(BufferedReader reader) throws IOException{ //TODO make directories be \name and files +name (list both)
+        File[] files = pwd.listFiles();
         int count = 0;
 
         if(files !=null && files.length > 25){
@@ -55,19 +57,19 @@ public class Util {
             if(reader.readLine().equals("y")){
                 for (File file : files) {
                     if (file.isDirectory()) {
-                        System.out.println(file.getName());
+                        System.out.println("/" + file.getName());
                     }
+                    else {System.out.println("+" + file.getName());}
                 }
             }
-            else {return;}
         }
         else if(files != null && files.length > 0){
             for (File file : files) {
                 if (file.isDirectory()) {
-                    System.out.println(file.getName());
+                    System.out.println("/" + file.getName());
                 }
+                else {System.out.println("+" + file.getName());}
             }
-            return;
         }
         else{
             System.out.println("No files found!");

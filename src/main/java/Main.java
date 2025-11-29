@@ -39,7 +39,7 @@ public class Main {
                     else {System.out.println("Too many arguments!");}
                     break;
                 case "ls":
-                    listDirectories(pwd, reader);
+                    listDirectories(reader);
                     break;
                 case "cat":
                     cat(input[1]);
@@ -47,8 +47,10 @@ public class Main {
                 case "pwd":
                     System.out.println(pwd.getAbsolutePath());
                     break;
+                case "cls", "clear":
+                    break;
                 default:
-                    System.out.println("Unknown command");
+                    System.out.println("! Unknown command");
                     break;
             }
         }
