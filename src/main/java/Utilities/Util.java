@@ -1,7 +1,5 @@
 package Utilities;
-import java.io.File;
-import java.io.IOError;
-import java.io.IOException;
+import java.io.*;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -48,15 +46,24 @@ public class Util {
     }
 
     //ls
-    public static void listDirectories(File directory) {
+    public static void listDirectories(File directory) { //TODO make directories be \name and files +name (list both)
         File[] files = directory.listFiles();
         int count = 0;
 
-//        if(files.length > 25){
-//            System.out.println("Do you want to continue? (y/n)");
-//        }
-
-        if (files != null && files.length > 0) {
+        if(files !=null && files.length > 25){
+            System.out.println("Do you want to list all files? (y/n)");
+            try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))){
+                if(br.readLine().equals("y")){
+                    for (File file : files) {
+                        if (file.isDirectory()) {
+                            System.out.println(file.getName());
+                        }
+                    }
+                }
+                else {return;}
+            }catch(IOException e){return;}
+        }
+        else if(files != null && files.length > 0){
             for (File file : files) {
                 if (file.isDirectory()) {
                     System.out.println(file.getName());
@@ -74,16 +81,20 @@ public class Util {
         File[] files = pwd.listFiles();
         assert files != null;
         for (File dirs : files) {
+            System.out.println(dirs.getName());
             if (dirs.getName().equals(filename)) {
-                File file = new File(filename);
+                File file = new File(pwd + "\\" + filename);
                 try (Scanner sc = new Scanner(file)){
                     while(sc.hasNextLine()){
                         System.out.println(sc.nextLine());
                     }
+                    file = null;
+                    files = null;
+                    return;
                 }catch(IOException e){return;}
             }
-            else {System.out.println("No such file was found!");}
         }
+        System.out.println("No such file was found!");
     }
 
     public static void newLine(){
