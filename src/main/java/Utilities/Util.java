@@ -24,10 +24,11 @@ public class Util {
     public static void cd(String path) {
         if (path.equals("..")) {
             try {
+                assert pwd.getParentFile() != null;
                 pwd = pwd.getParentFile();
                 return;
-            }catch (Exception e){
-                System.out.println("There is no directory above this one!"); //TODO wth...
+            }catch (NullPointerException e){
+                System.out.println("There is no directory above this one!"); //TODO how the hell am I supposed to do this...
             }
         }
 
@@ -48,7 +49,7 @@ public class Util {
     }
 
     //ls
-    public static void listDirectories(BufferedReader reader) throws IOException{ //TODO make directories be \name and files +name (list both)
+    public static void listDirectories(BufferedReader reader) throws IOException{
         File[] files = pwd.listFiles();
         int count = 0;
 
@@ -78,11 +79,9 @@ public class Util {
 
     //cat
     public static void cat(String filename) {
-        //TODO implement cat
         File[] files = pwd.listFiles();
         assert files != null;
         for (File dirs : files) {
-            System.out.println(dirs.getName());
             if (dirs.getName().equals(filename)) {
                 File file = new File(pwd + "\\" + filename);
                 try (Scanner sc = new Scanner(file)){
@@ -98,8 +97,9 @@ public class Util {
         System.out.println("No such file was found!");
     }
 
-    public static void newLine(){
+    public static void newLine(){ //TODO still somehow have to make this not crash after trying to get above "C:\" ...
         String name = System.getProperty("user.name") + "@" + System.getenv("COMPUTERNAME");
+        assert pwd != null;
         if(pwd.toString().equals(System.getProperty("user.home").toString())){
             System.out.print(name + " ~" + "\n" + "> ");
         }
