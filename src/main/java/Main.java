@@ -48,6 +48,16 @@ public class Main {
                     System.out.println(pwd.getAbsolutePath());
                     break;
                 case "cls", "clear":
+                    clearConsole(); //to be implemented
+                    break;
+                case "create":
+                    createFile(input[1]);
+                    break;
+                case "remove", "rm":
+                    removeFile(input[1]);
+                    break;
+                case "find":
+                    find(input[1]);
                     break;
                 default:
                     System.out.println("! Unknown command");

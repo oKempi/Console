@@ -63,6 +63,7 @@ public class Util {
                     else {System.out.println("+" + file.getName());}
                 }
             }
+            else{return;}
         }
         else if(files != null && files.length > 0){
             for (File file : files) {
@@ -78,7 +79,7 @@ public class Util {
     }
 
     //cat
-    public static void cat(String filename) {
+    public static void cat(String filename) { //cat file.smth -p "keyword" <= [-p] = print && "keyword" returns true/false if found in file
         File[] files = pwd.listFiles();
         assert files != null;
         for (File dirs : files) {
@@ -105,5 +106,37 @@ public class Util {
         }
         else{System.out.print(name + " ~\\" + pwd.getAbsolutePath() + "\n" + "> ");}
 
+    }
+
+    public static void clearConsole(){ //TODO implement cls
+         return;
+    }
+
+    public static void createFile(String filename) throws IOException { //TODO complete this (make sure the file gets created at the right place)
+        File file = new File(pwd, filename);
+        if(file.createNewFile()){
+            System.out.println("File created!");
+        }else{System.out.println("! Failed to create file");}
+    }
+
+    public static void removeFile(String filename) throws IOException {
+        File file = new File(pwd, filename);
+        if(file.delete()){
+            System.out.println("File deleted!");
+        }else {System.out.println("! Could not delete file");}
+    }
+
+    public static void find(String name){
+        File[] files = pwd.listFiles();
+
+        if(files != null && files.length > 0){
+            for(File file : files){
+                if(file.getName().equals(name)) {
+                    System.out.println("File found!");
+                    return;
+                }
+            }
+            System.out.println("! File not found");
+        }
     }
 }
