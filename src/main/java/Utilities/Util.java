@@ -126,7 +126,7 @@ public class Util {
         }else {System.out.println("! Could not delete file");}
     }
 
-    public static void find(String name){
+    public static void find(String name){ //add flags for only dirs || files, also "contains" flag could be nice
         File[] files = pwd.listFiles();
 
         if(files != null && files.length > 0){
