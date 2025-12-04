@@ -84,7 +84,7 @@ public class Util {
     }
 
     //cat
-    public static void cat(String filename) { //cat file.smth -p "keyword" <= [-p] = print && "keyword" returns true/false if found in file
+    public static void cat(String filename) { //TODO cat file.smth -p "keyword" <= [-p] = print && "keyword" returns true/false if found in file (maybe do in find)
         File[] files = pwd.listFiles();
         assert files != null;
         for (File dirs : files) {
@@ -103,7 +103,7 @@ public class Util {
         System.out.println("No such file was found!");
     }
 
-    public static void newLine(){ //TODO still somehow have to make this not crash after trying to get above "C:\" ...
+    public static void newLine(){
         String name = System.getProperty("user.name") + "@" + System.getenv("COMPUTERNAME");
         assert pwd != null;
         if(pwd.toString().equals(System.getProperty("user.home").toString())){
@@ -144,7 +144,7 @@ public class Util {
             System.out.println("! File not found");
         }
     }
-    public static void find(String name, String flag){ //add flags for only dirs || files, also "contains" flag
+    public static void find(String name, String flag){ //TODO add "contains" flag
         File[] files = pwd.listFiles();
 
         if(flag.equals("-d")){ //directory
