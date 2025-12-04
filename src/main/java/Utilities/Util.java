@@ -16,8 +16,13 @@ public class Util {
         System.out.println("ls - list directories in current directory");
         System.out.println("pwd - print working directory");
         System.out.println("exit - exit the program");
-        System.out.println("cat - show contents of a file");
+        System.out.println("cat [filename] - show contents of a file");
         System.out.println("clear/cls - clear the whole console");
+        System.out.println("create [filename] - creates a file in current directory");
+        System.out.println("remove/rm [filename] - removes file from current directory");
+        System.out.println("find [filename] [-flag]- finds file/directory in current directory");
+        System.out.println("                 [-f] - finds only files");
+        System.out.println("                 [-d] - finds only directories");
     }
 
     //CD
@@ -112,7 +117,7 @@ public class Util {
          return;
     }
 
-    public static void createFile(String filename) throws IOException { //TODO complete this (make sure the file gets created at the right place)
+    public static void createFile(String filename) throws IOException {
         File file = new File(pwd, filename);
         if(file.createNewFile()){
             System.out.println("File created!");
@@ -126,7 +131,7 @@ public class Util {
         }else {System.out.println("! Could not delete file");}
     }
 
-    public static void find(String name){ //add flags for only dirs || files, also "contains" flag could be nice
+    public static void find(String name){
         File[] files = pwd.listFiles();
 
         if(files != null && files.length > 0){
@@ -137,6 +142,32 @@ public class Util {
                 }
             }
             System.out.println("! File not found");
+        }
+    }
+    public static void find(String name, String flag){ //add flags for only dirs || files, also "contains" flag
+        File[] files = pwd.listFiles();
+
+        if(flag.equals("-d")){ //directory
+            if(files != null && files.length > 0){
+                for(File file : files){
+                    if(file.getName().equals(name) &&  file.isDirectory()) {
+                        System.out.println("Directory found!");
+                        return;
+                    }
+                }
+                System.out.println("! Directory not found");
+            }
+        }
+        else if(flag.equals("-f")){ //files
+            if(files != null && files.length > 0){
+                for(File file : files){
+                    if(file.getName().equals(name) && file.isFile()) {
+                        System.out.println("File found!");
+                        return;
+                    }
+                }
+                System.out.println("! File not found");
+            }
         }
     }
 }

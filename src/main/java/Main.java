@@ -57,7 +57,11 @@ public class Main {
                     removeFile(input[1]);
                     break;
                 case "find":
-                    find(input[1]);
+                    if(input.length < 3){
+                        find(input[1]);
+                    }else{
+                        find(input[1], input[2]);
+                    }
                     break;
                 default:
                     System.out.println("! Unknown command");
