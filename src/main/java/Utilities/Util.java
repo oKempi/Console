@@ -19,7 +19,9 @@ public class Util {
         System.out.println("cat [filename] - show contents of a file");
         System.out.println("clear/cls - clear the whole console");
         System.out.println("create [filename] - creates a file in current directory");
+        System.out.println("mkdir [dirname] - creates a new directory");
         System.out.println("remove/rm [filename] - removes file from current directory");
+        System.out.println("rmdir [dirname] - removes specific directory");
         System.out.println("find [filename] [-flag]- finds file/directory in current directory");
         System.out.println("                 [-f] - finds only files");
         System.out.println("                 [-d] - finds only directories");
@@ -129,6 +131,20 @@ public class Util {
         if(file.delete()){
             System.out.println("File deleted!");
         }else {System.out.println("! Could not delete file");}
+    }
+
+    public static void createDir(String dirname) throws IOException {
+        File dir = new File(pwd, dirname);
+        if(dir.mkdir()){
+            System.out.println("Directory created!");
+        }else{System.out.println("! Failed to create directory");}
+    }
+
+    public static void removeDir(String dirname) throws IOException {
+        File dir = new File(pwd, dirname);
+        if(dir.delete()){
+            System.out.println("Directory deleted!");
+        }else{System.out.println("! Could not delete directory");}
     }
 
     public static void find(String name){

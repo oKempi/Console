@@ -50,11 +50,17 @@ public class Main {
                 case "cls", "clear":
                     clearConsole(); //to be implemented
                     break;
-                case "create":
+                case "create", "mk":
                     createFile(input[1]);
                     break;
                 case "remove", "rm":
                     removeFile(input[1]);
+                    break;
+                case "mkdir":
+                    createDir(input[1]);
+                    break;
+                case "rmdir":
+                    removeDir(input[1]);
                     break;
                 case "find":
                     if(input.length < 3){
