@@ -1,5 +1,8 @@
 package Utilities;
+import javax.sound.midi.Soundbank;
 import java.io.*;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -17,7 +20,7 @@ public class Util {
         System.out.println("pwd - print working directory");
         System.out.println("exit - exit the program");
         System.out.println("cat [filename] - show contents of a file");
-        System.out.println("clear/cls - clear the whole console");
+        //System.out.println("clear/cls - clear the whole console");
         System.out.println("create [filename] - creates a file in current directory");
         System.out.println("mkdir [dirname] - creates a new directory");
         System.out.println("remove/rm [filename] - removes file from current directory");
@@ -25,6 +28,7 @@ public class Util {
         System.out.println("find [filename] [-flag]- finds file/directory in current directory");
         System.out.println("                 [-f] - finds only files");
         System.out.println("                 [-d] - finds only directories");
+        System.out.println("status [ip] - pings an IP address and returns availability");
     }
 
     //CD
@@ -115,10 +119,6 @@ public class Util {
 
     }
 
-    public static void clearConsole(){ //TODO implement cls
-         return;
-    }
-
     public static void createFile(String filename) throws IOException {
         File file = new File(pwd, filename);
         if(file.createNewFile()){
@@ -184,6 +184,20 @@ public class Util {
                 }
                 System.out.println("! File not found");
             }
+        }
+    }
+
+    public static void ping(String ip) {
+        try{
+            InetAddress addr = InetAddress.getByName(ip);
+            if(addr.isReachable(5000)){
+                System.out.println(ip + " is reachable");
+            }else{
+                System.out.println(ip + " is not reachable");
+            }
+        }
+        catch (IOException e) {
+            System.out.println("! The address is either: unreachable, non-existent or typed wrong");
         }
     }
 }

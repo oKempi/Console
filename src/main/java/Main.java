@@ -47,9 +47,6 @@ public class Main {
                 case "pwd":
                     System.out.println(pwd.getAbsolutePath());
                     break;
-                case "cls", "clear":
-                    clearConsole(); //to be implemented
-                    break;
                 case "create", "mk":
                     createFile(input[1]);
                     break;
@@ -68,6 +65,11 @@ public class Main {
                     }else{
                         find(input[1], input[2]);
                     }
+                    break;
+                case "status":
+                    if(input.length == 2){
+                        ping(input[1]);
+                    }else{System.out.println("! You have entered too many/few arguments");}
                     break;
                 default:
                     System.out.println("! Unknown command");
