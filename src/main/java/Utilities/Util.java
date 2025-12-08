@@ -90,6 +90,7 @@ public class Util {
     }
 
     //cat
+    //TODO make it open more files, not just text based ones (maybe)
     public static void cat(String filename) { //TODO cat file.smth -p "keyword" <= [-p] = print && "keyword" returns true/false if found in file (maybe do in find)
         File[] files = pwd.listFiles();
         assert files != null;

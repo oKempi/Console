@@ -71,6 +71,8 @@ public class Main {
                         ping(input[1]);
                     }else{System.out.println("! You have entered too many/few arguments");}
                     break;
+                case "run": //TODO try to implement?
+                    break;
                 default:
                     System.out.println("! Unknown command");
                     break;
