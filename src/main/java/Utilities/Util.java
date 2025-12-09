@@ -1,8 +1,6 @@
 package Utilities;
-import javax.sound.midi.Soundbank;
 import java.io.*;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -28,7 +26,7 @@ public class Util {
         System.out.println("find [filename] [-flag]- finds file/directory in current directory");
         System.out.println("                 [-f] - finds only files");
         System.out.println("                 [-d] - finds only directories");
-        System.out.println("status [ip] - pings an IP address and returns availability");
+        System.out.println("status [ip] - pings an IP address and returns availability + ping");
     }
 
     //CD
@@ -190,9 +188,11 @@ public class Util {
 
     public static void ping(String ip) {
         try{
+            long start = System.currentTimeMillis();
             InetAddress addr = InetAddress.getByName(ip);
             if(addr.isReachable(5000)){
                 System.out.println(ip + " is reachable");
+                System.out.println("ping was: " + (System.currentTimeMillis() - start));
             }else{
                 System.out.println(ip + " is not reachable");
             }
