@@ -30,14 +30,39 @@ public class Main {
                     }
                     System.out.println(stringBuilder.toString());
                 case "cd":
-                    if (!(input.length > 2)) {
+                    if(input.length == 2){
+                        cd(input[1]);
+                    }
+                    else if(input.length > 1){
                         if(input[1].contains("-r")){
                             cd(true, input[1]);
+                            break;
                         }
-                        else{cd(input[1]);}
+                        else{ //TODO lowkey fucked it up over here...
+                            String path = "";
+                            for (int i = 1; i < input.length; i++){
+                                path = path + " " + input[i];
+                            }
+                            cd(path);
+                            break;
+                        }
                     }
-                    else {System.out.println("Too many arguments!");}
+                    else {System.out.println("Too few arguments!");}
                     break;
+//                    if (input.length >= 2) {
+//                        if(input[1].contains("-r")){
+//                            cd(true, input[1]);
+//                        }
+//                        else{ //TODO lowkey fucked it up over here...
+//                            String path = "";
+//                            for (int i = 1; i < input.length; i++){
+//                                path = path + " " + input[i];
+//                            }
+//                            cd(path);
+//                        }
+//                    }
+//                    else {System.out.println("Too few arguments!");}
+//                    break;
                 case "ls":
                     listDirectories(reader);
                     break;
@@ -59,12 +84,13 @@ public class Main {
                 case "rmdir":
                     removeDir(input[1]);
                     break;
-                case "find":
-                    if(input.length < 3){
+                case "find": //TODO fix this mess...
+                    if(input.length == 2){
                         find(input[1]);
-                    }else{
-                        find(input[1], input[2]);
                     }
+                    else if (input.length == 3){
+                        find(input[1], input[2]);
+                    }else{System.out.println("! Too few/many arguments");}
                     break;
                 case "status":
                     if(input.length == 2){
@@ -72,6 +98,12 @@ public class Main {
                     }else{System.out.println("! You have entered too many/few arguments");}
                     break;
                 case "run": //TODO try to implement?
+                    break;
+                case "grep":
+                    if(input.length == 3){
+                        grep(input[1], input[2]);
+                    }
+                    else{System.out.println("! You have entered too many/few arguments");}
                     break;
                 default:
                     System.out.println("! Unknown command");

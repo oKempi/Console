@@ -26,6 +26,7 @@ public class Util {
         System.out.println("find [filename] [-flag]- finds file/directory in current directory");
         System.out.println("                 [-f] - finds only files");
         System.out.println("                 [-d] - finds only directories");
+        System.out.println("grep [filename] [keyword] - returns boolean whether a file contains a keyword");
         System.out.println("status [ip] - pings an IP address and returns availability + ping");
     }
 
@@ -89,7 +90,7 @@ public class Util {
 
     //cat
     //TODO make it open more files, not just text based ones (maybe)
-    public static void cat(String filename) { //TODO cat file.smth -p "keyword" <= [-p] = print && "keyword" returns true/false if found in file (maybe do in find)
+    public static void cat(String filename) {
         File[] files = pwd.listFiles();
         assert files != null;
         for (File dirs : files) {
@@ -115,7 +116,6 @@ public class Util {
             System.out.print(name + " ~" + "\n" + "> ");
         }
         else{System.out.print(name + " ~\\" + pwd.getAbsolutePath() + "\n" + "> ");}
-
     }
 
     public static void createFile(String filename) throws IOException {
@@ -159,7 +159,7 @@ public class Util {
             System.out.println("! File not found");
         }
     }
-    public static void find(String name, String flag){ //TODO add "contains" flag
+    public static void find(String name, String flag){
         File[] files = pwd.listFiles();
 
         if(flag.equals("-d")){ //directory
@@ -199,6 +199,19 @@ public class Util {
         }
         catch (IOException e) {
             System.out.println("! The address is either: unreachable, non-existent or typed wrong");
+        }
+    }
+
+    public static void grep(String keyword, String filename) throws FileNotFoundException {
+        File file = new File(pwd, filename);
+        try(Scanner sc = new Scanner(file)){
+            while(sc.hasNextLine()){
+                if(sc.nextLine().contains(keyword)){
+                    System.out.println(keyword + " found in " + filename);
+                    return;
+                }
+            }
+            System.out.println("! " + keyword + " was not found in " + filename);
         }
     }
 }
