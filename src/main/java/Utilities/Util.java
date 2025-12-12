@@ -51,7 +51,7 @@ public class Util {
         }
         catch(Exception e){System.out.println("No such directory");}
     }
-    public static void cd(Boolean yes, String flag) {
+    public static void cd(Boolean yes, String flag) { //TODO there has to be a bug somewhere here
         if(Objects.equals(flag, "-r")){
             pwd = new File(System.getProperty("user.home").toString());
             return;
